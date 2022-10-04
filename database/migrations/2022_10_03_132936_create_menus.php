@@ -14,8 +14,8 @@ class CreateMenus extends Migration
     public function up()
     {
         Schema::create('menus', function (Blueprint $table) {
-            $table->id('id_menu');
-            $table->integer('id_category');
+            $table->id('idmenu');
+            $table->integer('idcategory');
             $table->string('name');
             $table->text('description');
             $table->double('price');

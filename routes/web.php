@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,9 +16,4 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    Inertia::setRootView('login');
-    return Inertia::render('Login');
-});
-
-require __DIR__ . '/auth.php';
+Route::get('/login', [LoginController::class, 'index']);

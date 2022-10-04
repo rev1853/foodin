@@ -14,7 +14,7 @@ class CreateTags extends Migration
     public function up()
     {
         Schema::create('tags', function (Blueprint $table) {
-            $table->id('id_tag');
+            $table->id('idtag');
             $table->string('name', 50);
         });
     }

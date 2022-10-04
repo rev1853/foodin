@@ -14,10 +14,10 @@ class CreateUsers extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id('id_user');
+            $table->id('iduser');
             $table->string('nickname', 100);
             $table->string('email', 100);
-            $table->string('password', 40);
+            $table->string('password', 100);
             $table->string('commonname', 120);
         });
     }
