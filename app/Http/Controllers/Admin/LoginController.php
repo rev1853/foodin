@@ -22,7 +22,7 @@ class LoginController extends Controller
         $result = Auth::attempt($credentials);
         if ($result) {
             $req->session()->regenerate();
-            return response()->json(['message' => 'Login success']);
+            return response()->json(['message' => 'Login success', 'redirectUrl' => url('admin/dashboard')]);
         } else {
             return response()->json(['message' => 'Login failed'], 401);
         }

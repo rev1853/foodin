@@ -11,7 +11,7 @@ class Login extends React.Component {
     super(props);
     this.emailRef = React.createRef();
     this.passwordRef = React.createRef();
-    this.state =  {isLoading: false};
+    this.state = { isLoading: false };
   }
 
   get email() {
@@ -27,23 +27,28 @@ class Login extends React.Component {
    */
   onFormSubmit = async (e) => {
     e.preventDefault();
-    this.setState({isLoading: true});
-    try{
+    this.setState({ isLoading: true });
+    try {
       const response = await service.post('/login', {
         email: this.email,
         password: this.password,
       });
-      
-      if(response.status == 200) Alert.success("Successfully logged in");
-      else Alert.failed("Wrong credentials");
-    }catch{
+
+      if (response.status == 200) {
+        await Alert.success("Successfully logged in");
+        location.href = response.data.redirectUrl;
+      }
+      else {
+        Alert.failed("Wrong credentials");
+      }
+    } catch {
       Alert.failed("Wrong credentials");
-    }finally{
-      this.setState({isLoading: false});
+    } finally {
+      this.setState({ isLoading: false });
     }
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     console.log(email);
   }
 
@@ -63,7 +68,7 @@ class Login extends React.Component {
                           <FormGroup disabled={this.state.isLoading} ref={this.emailRef} name="email" type="email" label="Email" />
                           <FormGroup disabled={this.state.isLoading} ref={this.passwordRef} name="password" type="password" label="Password" />
                           <div className="text-center">
-                            <button {... this.state.isLoading ? {disabled: "disabled"} : {}} type="submit" className="btn btn-primary btn-block">Log In</button> 
+                            <button {... this.state.isLoading ? { disabled: "disabled" } : {}} type="submit" className="btn btn-primary btn-block">Log In</button>
                           </div>
                         </form>
                         <div className="new-account mt-3">
