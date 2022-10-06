@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\InertiaPagesController;
 use App\Http\Controllers\Admin\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +21,9 @@ Route::prefix('admin')->group(function () {
    Route::get('login', [LoginController::class, 'index']);
    Route::post('login', [LoginController::class, 'login']);
 
-   // login
-   Route::get('dashboard', [DashboardController::class, 'index']);
-   Route::get('/', [DashboardController::class, 'index']);
+   Route::name('admin.')->controller(InertiaPagesController::class)->group(function () {
+      Route::get('/', 'dashboard')->name('index');
+      Route::get('/dashboard', 'dashboard')->name('dashboard');
+      Route::get('/user', 'user')->name('user');
+   });
 });
