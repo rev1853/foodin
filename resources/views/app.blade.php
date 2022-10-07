@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ url('css/app.css') }}">
     <link href="{{ url('') }}/zenix/vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
     <link href="{{ url('') }}/zenix/css/style.css" rel="stylesheet">
+    <link href="{{ url('') }}/zenix/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 
     <!-- Scripts -->
     @routes
@@ -32,6 +33,7 @@
     <script src="{{ url('') }}/zenix/vendor/global/global.min.js"></script>
 
     <script src="{{ url('') }}/zenix/vendor/owl-carousel/owl.carousel.js"></script>
+    <script src="{{ url('') }}/zenix/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
     <script src="{{ url('') }}/zenix/js/custom.min.js"></script>
     <script src="{{ url('') }}/zenix/js/deznav-init.js"></script>
     <script src="{{ url('') }}/zenix/js/demo.js"></script>

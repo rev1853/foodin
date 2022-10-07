@@ -1,15 +1,45 @@
+import RouteNames from "@/constants/routeNames";
 import SharedData from "@/Helpers/SharedData";
 import SidebarItem from "./SidebarItem";
+import { Ziggy } from "@/ziggy";
 
-const { Component } = require("react");
+const { Component, useRef, createRef } = require("react");
 
 class Sidebar extends Component {
+    dashboardRef;
+    userRef;
+
+    constructor(props) {
+        super(props);
+        this.dashboardRef = createRef();
+        this.userRef = createRef();
+
+    }
+
     get #url() {
         return this.props.sharedData.props.ziggy.url;
     }
 
     get #user() {
         return this.props.sharedData.props.auth.user;
+    }
+
+    onRouteChange = () => {
+        this.dashboardRef.current.deactivated();
+        this.userRef.current.deactivated();
+    }
+
+    componentDidMount() {
+        this.onRouteChange();
+
+        switch (route().current()) {
+            case RouteNames.dashboard:
+                this.dashboardRef.current.activated();
+                break;
+            case RouteNames.user:
+                this.userRef.current.activated();
+                break;
+        }
     }
 
     render() {
@@ -25,12 +55,12 @@ class Sidebar extends Component {
                     </div>
                     <ul className="metismenu" id="menu">
                         <li className="nav-label first">Main Menu</li>
-                        <SidebarItem text="Dashboard" />
-                        <SidebarItem text="User Management" />
+                        <SidebarItem onVisit={this.onRouteChange} ref={this.dashboardRef} routeName={RouteNames.dashboard} text="Dashboard" />
+                        <SidebarItem onVisit={this.onRouteChange} ref={this.userRef} routeName={RouteNames.user} text="User Management" />
 
                         <li className="nav-label">Products</li>
-                        <SidebarItem text="Products" />
-                        <SidebarItem text="Categories" />
+                        <SidebarItem onVisit={this.onRouteChange} routeName={RouteNames.user} text="Products" />
+                        <SidebarItem onVisit={this.onRouteChange} routeName={RouteNames.user} text="Categories" />
                     </ul>
                     <div className="copyright">
                         <p><strong>PT. FoodIn Berjasa</strong> © 2021 All Rights Reserved</p>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import FormGroup from '@/Components/Admin/FormGroup';
-import service from '@/Services/Admin/Services';
+import Input from '@/Components/Admin/Input';
+import { adminService } from '@/Services/Admin/Services';
 import Alert from '@/Helpers/Alert';
 
 class Login extends React.Component {
@@ -29,7 +29,7 @@ class Login extends React.Component {
     e.preventDefault();
     this.setState({ isLoading: true });
     try {
-      const response = await service.post('/login', {
+      const response = await adminService.post('/login', {
         email: this.email,
         password: this.password,
       });
@@ -48,10 +48,6 @@ class Login extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    console.log(email);
-  }
-
   render() {
     return (
       <>
@@ -65,8 +61,8 @@ class Login extends React.Component {
                       <div className="auth-form">
                         <h4 className="text-center mb-4">Sign in your account</h4>
                         <form onSubmit={this.onFormSubmit} action="index.html">
-                          <FormGroup disabled={this.state.isLoading} ref={this.emailRef} name="email" type="email" label="Email" />
-                          <FormGroup disabled={this.state.isLoading} ref={this.passwordRef} name="password" type="password" label="Password" />
+                          <Input strongLabel={true} disabled={this.state.isLoading} ref={this.emailRef} type="email" label="Email" />
+                          <Input strongLabel={true} disabled={this.state.isLoading} ref={this.passwordRef} type="password" label="Password" />
                           <div className="text-center">
                             <button {... this.state.isLoading ? { disabled: "disabled" } : {}} type="submit" className="btn btn-primary btn-block">Log In</button>
                           </div>

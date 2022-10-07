@@ -6,6 +6,10 @@ class Alert {
    static async failed(message) {
       return await swal("Failed", message, "warning");
    }
+
+   static async error(message) {
+      return await swal("Something went wrong", message, "error");
+   }
 }
 
 export default Alert;

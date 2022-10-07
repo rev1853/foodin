@@ -19,8 +19,6 @@
     <title>FoodIn - Admin</title>
     <link href="{{ url('') }}/zenix/css/style.css" rel="stylesheet">
     <link href="{{ url('') }}/zenix/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
-    </link>
-
     <!-- Scripts -->
     @routes
     <script src="{{ url('js/app.js') }}" defer></script>
