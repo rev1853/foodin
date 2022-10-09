@@ -19,7 +19,7 @@ class UserFactory extends Factory
     {
         $nickname = $this->faker->userName();
         $email = $this->faker->email();
-        $password = Hash::make($nickname . 'akua');
+        $password = $nickname . 'akua';
         $commonname = $this->faker->name();
         return [
             'nickname' => $nickname,

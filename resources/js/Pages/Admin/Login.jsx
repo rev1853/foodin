@@ -67,9 +67,6 @@ class Login extends React.Component {
                             <button {... this.state.isLoading ? { disabled: "disabled" } : {}} type="submit" className="btn btn-primary btn-block">Log In</button>
                           </div>
                         </form>
-                        <div className="new-account mt-3">
-                          <p>Don't have an account? <a className="text-primary" href="page-register.html">Sign up</a></p>
-                        </div>
                       </div>
                     </div>
                   </div>

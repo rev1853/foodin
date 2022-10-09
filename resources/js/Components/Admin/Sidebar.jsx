@@ -8,11 +8,17 @@ const { Component, useRef, createRef } = require("react");
 class Sidebar extends Component {
     dashboardRef;
     userRef;
+    tagRef;
+    categoryRef;
+    menuRef;
 
     constructor(props) {
         super(props);
         this.dashboardRef = createRef();
         this.userRef = createRef();
+        this.tagRef = createRef();
+        this.categoryRef = createRef();
+        this.menuRef = createRef();
 
     }
 
@@ -27,6 +33,9 @@ class Sidebar extends Component {
     onRouteChange = () => {
         this.dashboardRef.current.deactivated();
         this.userRef.current.deactivated();
+        this.tagRef.current.deactivated();
+        this.categoryRef.current.deactivated();
+        this.menuRef.current.deactivated();
     }
 
     componentDidMount() {
@@ -39,6 +48,15 @@ class Sidebar extends Component {
             case RouteNames.user:
                 this.userRef.current.activated();
                 break;
+            case RouteNames.tag:
+                this.tagRef.current.activated();
+                break;
+            case RouteNames.category:
+                this.categoryRef.current.activated();
+                break;
+            case RouteNames.menu:
+                this.menuRef.current.activated();
+                break;
         }
     }
 
@@ -48,7 +66,7 @@ class Sidebar extends Component {
                 <div className="deznav-scroll">
                     <div className="main-profile">
                         <div className="image-bx">
-                            <img src={`${this.#url}/zenix/images/Untitled-1.jpg`} alt=""></img>
+                            <img src={`${this.#url}/man.png`} alt=""></img>
                         </div>
                         <h5 className="name"><span className="font-w400">Hello,</span> {this.#user.nickname}</h5>
                         <p className="email"><a className="__cf_email__">{this.#user.email}</a></p>
@@ -58,9 +76,10 @@ class Sidebar extends Component {
                         <SidebarItem onVisit={this.onRouteChange} ref={this.dashboardRef} routeName={RouteNames.dashboard} text="Dashboard" />
                         <SidebarItem onVisit={this.onRouteChange} ref={this.userRef} routeName={RouteNames.user} text="User Management" />
 
-                        <li className="nav-label">Products</li>
-                        <SidebarItem onVisit={this.onRouteChange} routeName={RouteNames.user} text="Products" />
-                        <SidebarItem onVisit={this.onRouteChange} routeName={RouteNames.user} text="Categories" />
+                        <li className="nav-label">Menu</li>
+                        <SidebarItem onVisit={this.onRouteChange} ref={this.menuRef} routeName={RouteNames.menu} text="Menus" />
+                        <SidebarItem onVisit={this.onRouteChange} ref={this.tagRef} routeName={RouteNames.tag} text="Tags" />
+                        <SidebarItem onVisit={this.onRouteChange} ref={this.categoryRef} routeName={RouteNames.category} text="Categories" />
                     </ul>
                     <div className="copyright">
                         <p><strong>PT. FoodIn Berjasa</strong> © 2021 All Rights Reserved</p>

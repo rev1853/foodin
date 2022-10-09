@@ -14,7 +14,7 @@ class CreateMenuTags extends Migration
     public function up()
     {
         Schema::create('menu_tags', function (Blueprint $table) {
-            $table->id('idtag');
+            $table->integer('idtag');
             $table->integer('idmenu');
         });
     }

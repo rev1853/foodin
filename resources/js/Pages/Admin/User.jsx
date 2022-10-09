@@ -164,7 +164,7 @@ class User extends Component {
                         <DataTable ref={this.tableRef} columnNames={this.tableColumnNames} headers={this.tableHeaders} actionBuilder={this.tableActionBuilder} urlPath="/user" />
                     </div>
                 </div>
-            </div >
+            </div>
         );
     }
 }

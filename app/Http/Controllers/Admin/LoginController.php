@@ -12,7 +12,7 @@ class LoginController extends Controller
     public function index(Request $req)
     {
 
-        Inertia::setRootView('login');
+        Inertia::setRootView('admin/login');
         return Inertia::render('Admin/Login');
     }
 

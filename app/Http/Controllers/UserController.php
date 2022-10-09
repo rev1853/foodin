@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserCollection;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function all(Request $request)
     {
-        return response()->json(User::all());
+        $data = User::paginate(10);
+        return response()->json($data);
     }
 
     public function store(Request $request, User $user)

@@ -1,13 +1,17 @@
 import Alert from "@/Helpers/Alert";
 import { service } from "@/Services/Admin/Services";
+import Pagination from "./Pagination";
 
 const { Component } = require("react");
 
 class DataTable extends Component {
+   urlPath;
+   startNum;
 
    constructor(props) {
       super(props);
-      this.state = { items: [] };
+      this.state = { items: [], paginations: [] };
+      this.urlPath = props.urlPath;
    }
 
    componentDidMount() {
@@ -16,9 +20,13 @@ class DataTable extends Component {
 
    async reload() {
       try {
-         const response = await service.get(this.props.urlPath);
+         const response = await service.get(this.urlPath);
          if (response.status == 200) {
-            this.setState({ items: response.data });
+            const data = response.data.data;
+            delete response.data.data;
+            const paginations = response.data;
+            this.startNum = paginations.from;
+            this.setState(() => ({ items: data, paginations: paginations }));
          } else {
             Alert.failed('Failed to load data, try again tomorrow');
          }
@@ -45,7 +53,7 @@ class DataTable extends Component {
 
       if (!this.props.withoutNumber) {
          columns.unshift((
-            <td key={`number-${index}`}><strong>{index + 1}</strong></td>
+            <td key={`number-${index}`}><strong>{this.startNum + index}</strong></td>
          ));
       }
 
@@ -79,6 +87,11 @@ class DataTable extends Component {
       return this.props.columnNames.map((value, index) => <td key={this.generateKey(rowNum, index)}>{data[value]}</td>);
    }
 
+   onPaginationClick = (url) => {
+      this.urlPath = url;
+      this.reload();
+   }
+
    render() {
       return (
          <div className="table-responsive">
@@ -97,6 +110,7 @@ class DataTable extends Component {
                   }
                </tbody>
             </table>
+            <Pagination onClick={this.onPaginationClick} paginations={this.state.paginations} />
          </div>
       );
    }
